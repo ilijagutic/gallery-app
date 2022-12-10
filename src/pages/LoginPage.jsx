@@ -29,6 +29,7 @@ function Login() {
             <div className='containter p-5 text-center'>
                 <form onSubmit={onSubmitHandler}>
                     <div className="form-group">
+                        <label>Email : </label>
                         <input
                             className='form-control'
                             type="text"
@@ -40,6 +41,7 @@ function Login() {
                         />
                     </div>
                     <div className="form-group">
+                    <label>Sifra : </label>
                         <input
                             className='form-control'
                             type="password"

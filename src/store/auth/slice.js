@@ -2,14 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const middlewareActions = {
   login: () => {},
+  register: () => {},
+  logout: () => {},
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
     // isAuthenticated: false,
-    token: localStorage.getItem('token'),
-    isAuthenticated: localStorage.getItem('token') ? true : false,
+    token: localStorage.getItem("token"),
+    isAuthenticated: localStorage.getItem("token") ? true : false,
     loginErrorMsg: "",
   },
   reducers: {
@@ -23,9 +25,6 @@ export const authSlice = createSlice({
   },
 });
 
-// export const {
-//     setIsAuthenticated
-// } = authSlice.actions;
-export const { setIsAuthenticated, login, setLoginErrorMsg } =
+export const { setIsAuthenticated, login, setLoginErrorMsg,register ,logout } =
   authSlice.actions;
 export default authSlice.reducer;

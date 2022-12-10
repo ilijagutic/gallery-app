@@ -9,7 +9,7 @@ const Routes = () => {
   return (
     <>
       <Switch>
-      <PublicRoute exact path="/">
+        <PublicRoute exact path="/">
           <HomePage />
         </PublicRoute>
         <PublicRoute path="/login">
