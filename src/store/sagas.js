@@ -1,3 +1,9 @@
-const sagas = {};
+// const sagas = {};
+import * as authSagas from "./auth/saga";
 
-export default sagas;
+// export default sagas;
+const sagas = {
+    ...authSagas,
+  };
+  
+  export default sagas;
