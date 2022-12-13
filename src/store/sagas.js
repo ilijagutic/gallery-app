@@ -1,9 +1,9 @@
-// const sagas = {};
+import * as gallerySagas from "./gallery/saga";
 import * as authSagas from "./auth/saga";
 
-// export default sagas;
 const sagas = {
-    ...authSagas,
-  };
-  
-  export default sagas;
+  ...gallerySagas,
+  ...authSagas,
+};
+
+export default sagas;
