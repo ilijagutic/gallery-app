@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 const middlewareActions = {
   getGalleries: () => {},
@@ -6,6 +7,11 @@ const middlewareActions = {
   getMyGalleries: () => {},
   getUserGalleries: () => {},
   getGallery: () => {},
+  createGallery: () => {},
+  editGallery: () => {},
+  deleteGallery: () => {},
+  addComment: () => {},
+  removeComment: () => {},
 };
 
 export const gallerySlice = createSlice({
@@ -41,22 +47,34 @@ export const gallerySlice = createSlice({
     setGallery: (state, action) => {
       state.gallery = action.payload;
     },
+    addCommentToGallery: (state, action) => {
+      state.gallery.comments.push(action.payload);
+    },
+    removeCommentFromGallery: (state, action) => {
+      state.gallery.comments = state.gallery.comments.filter(
+        (comment) => comment.id != action.payload
+      );
+    },
     setCurrentPicture: (state, action) => {
       if (action.payload === "prev") {
         state.currentPicture--;
-      }
-      if (action.payload === "next") {
+      } else if (action.payload === "next") {
         state.currentPicture++;
+      } else {
+        state.currentPicture = action.payload;
       }
+
       if (state.gallery.images) {
         if (state.currentPicture < 0) {
           state.currentPicture = state.gallery.images.length - 1;
         }
         if (state.currentPicture >= state.gallery.images.length) {
-          console.log(state.gallery.images.length - 1);
           state.currentPicture = 0;
         }
       }
+    },
+    addGallery: (state, action) => {
+      state.galleries = action.payload;
     },
     ...middlewareActions,
   },
@@ -75,6 +93,14 @@ export const {
   getGallery,
   setGallery,
   setCurrentPicture,
+  addGallery,
+  createGallery,
+  editGallery,
+  deleteGallery,
   reset,
+  addComment,
+  addCommentToGallery,
+  removeComment,
+  removeCommentFromGallery,
 } = gallerySlice.actions;
 export default gallerySlice.reducer;

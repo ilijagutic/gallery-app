@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLoginErrorMsg } from "../store/auth/selectors";
 import { login, setLoginErrorMsg } from "../store/auth/slice";
-function Login() {
+import { FaSignInAlt } from 'react-icons/fa'
+
+const Login = () => {
     const dispatch = useDispatch();
     const error = useSelector(selectLoginErrorMsg);
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -24,30 +26,28 @@ function Login() {
         dispatch(login(userData))
     }
     return (
-        <>
-        <h1>Login</h1>
+        <div className="container d.flex my-5">
+            <h1> <FaSignInAlt className="mx-3"/>ULOGUJ SE</h1>
             <div className='containter p-5 text-center'>
                 <form onSubmit={onSubmitHandler}>
                     <div className="form-group">
-                        <label>Email : </label>
                         <input
                             className='form-control'
                             type="text"
                             name="email"
                             id="email"
-                            placeholder='Unesite email'
+                            placeholder='Email'
                             value={email}
                             onChange={onChangeHandler}
                         />
                     </div>
                     <div className="form-group">
-                    <label>Sifra : </label>
                         <input
                             className='form-control'
                             type="password"
                             name="password"
                             id="password"
-                            placeholder='Unesite sifru'
+                            placeholder='Password'
                             value={password}
                             onChange={onChangeHandler}
                         />
@@ -58,8 +58,7 @@ function Login() {
                     </div>
                 </form>
             </div>
-        </>
-
+        </div>
     );
 }
 

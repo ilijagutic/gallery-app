@@ -3,34 +3,37 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectIsHidden } from "../store/gallery/selectors";
 import { setCurrentPage } from "../store/gallery/slice";
-function GalleriesList({ galleries }) {
+
+
+const GalleriesList = ({ galleries }) => {
+
   const dispatch = useDispatch();
   const isHidden = useSelector(selectIsHidden);
+ 
   return (
     <div className=' m-3 text-center'>
-      {galleries.length ? (
+      {galleries.length > 0 ? (
         galleries.map((gallery, index) => (
           <div key={index}>
-            <h1>
-              <Link className='text-dark' to={`galleries/${gallery.id}`}>
+            <h1 className="display-3">
+              <Link to={`galleries/${gallery.id}`}>
                 {gallery.name}
               </Link>
             </h1>
             <img
-              className='rounded mx-auto d-block'
               style={{
-                width: "250px",
-                height: "175px",
+                width: "25%",
+                height: "25%",
               }}
               src={
                 gallery.images[0]?.image_url
               }
               alt='picture'
             />
-            <p style={{ fontSize: "1.5em" }}>{gallery.description}</p>
+            <p>{gallery.description}</p>
             <span>
-              Created by : {" "}
-              <Link className='text-dark' to={`/authors/${gallery.user_id}`}>
+              Kreirao: {" "}
+              <Link to={`/authors/${gallery.user_id}`}>
                 {gallery.user.first_name} {gallery.user.last_name}
               </Link>{" "}
               <em>{gallery.created_at}</em>
@@ -39,7 +42,10 @@ function GalleriesList({ galleries }) {
           </div>
         ))
       ) : (
-        <div className='display-4'>Empty</div>
+        <>
+          <div>Empty</div>
+          <Link to="/create"> <button className="btn">Kreiraj galeriju:</button> </Link>
+        </>
       )}
       {!isHidden && (
         <button
