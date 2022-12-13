@@ -1,4 +1,6 @@
 import logo from './logo.svg';
+import {FaBeer} from 'react-icons/fa';
+
 import './App.css';
 import Navbar from './components/Navbar';
 

@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import CommentService from "../../services/CommentService";
-import GalleryService from "../../services/GalleryService";
+import CommentService from "../services/CommentService";
+import GalleryService from "../services/GalleryService";
 import {
   addComment,
   addCommentToGallery,
@@ -18,7 +18,7 @@ import {
   setGalleries,
   setGallery,
   setIsHidden,
-} from "./slice";
+} from "../store/gallery/slice";
 
 function* getGalleriesHandler(action) {
   try {
@@ -121,3 +121,5 @@ export function* watchGallery() {
   yield takeLatest(addComment.type, addCommentHandler);
   yield takeLatest(removeComment.type, removeCommentHandler);
 }
+
+export default GalleryService;

@@ -17,6 +17,7 @@ import {
 
 const ViewGallery = () => {
   const { id } = useParams();
+  console.log(id);
   const history = useHistory();
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
@@ -31,7 +32,7 @@ const ViewGallery = () => {
 
   const deleteHandler = () => {
     const deletePrompt = prompt(
-      "Obrisati galeriju (Y/N)?",
+      "Are you sure you want to delete this gallery(Y/N)?",
       "Y"
     );
     if (deletePrompt.toLowerCase() === "y") {
@@ -46,7 +47,7 @@ const ViewGallery = () => {
 
   const deleteCommentHandler = (id) => {
     const deleteCommentPropmpt = prompt(
-      "Obrisati komentar (Y/N)?",
+      "Are you sure you want to delete this comment(Y/N)?",
       "Y"
     );
     if (deleteCommentPropmpt.toLowerCase() === "y") {
@@ -64,16 +65,16 @@ const ViewGallery = () => {
         <div className='m-3  text-right'>
           <button
             className='btn btn-success'
-            onClick={() => history.push(`/edit-gallery/${id}`)}
+            onClick={() => history.push(`/edit/${id}`)}
           >
-            Uredi
+            Edit
           </button>
           <button
             type='button'
             className='btn btn-danger ml-2'
             onClick={deleteHandler}
           >
-            Obrisi
+            Delete
           </button>
         </div>
       )}
@@ -88,10 +89,11 @@ const ViewGallery = () => {
         </h2>
       )}
       <p className='text-center'>{gallery.description}</p>
+      {/* carousel */}
       <div
         id='carouselExampleControls'
         className='carousel slide'
-        style={{ background: "#7d7662" }}
+        style={{ background: "#7d7777" }}
         data-ride='carousel'
       >
         {gallery && (
@@ -104,7 +106,7 @@ const ViewGallery = () => {
                 <img
                   src={gallery.images[currentPicture]?.image_url}
                   className='d-block mx-auto'
-                  style={{ width: "35%", height: "30%" }}
+                  style={{ width: "40%", height: "30%" }}
                   alt='First slide'
                 />
               </a>
@@ -120,7 +122,7 @@ const ViewGallery = () => {
             className='carousel-control-prev-icon'
             aria-hidden='true'
           ></span>
-          <span className='sr-only'>Predhodno</span>
+          <span className='sr-only'>Previous</span>
         </button>
         <button
           className='carousel-control-next'
@@ -131,7 +133,7 @@ const ViewGallery = () => {
             className='carousel-control-next-icon'
             aria-hidden='true'
           ></span>
-          <span className='sr-only'>Sledece</span>
+          <span className='sr-only'>Next</span>
         </button>
       </div>
       {/* comments */}
@@ -164,7 +166,7 @@ const ViewGallery = () => {
                       onClick={() => deleteCommentHandler(comment.id)}
                       className='btn btn-danger mb-2'
                     >
-                      Obrisi komentar
+                      Delete
                     </button></div>
 
                   )}
@@ -186,7 +188,7 @@ const ViewGallery = () => {
             ></textarea>
             <br />
             <button type='submit' className='btn btn-primary'>
-              Potvrdi
+              Submit
             </button>
           </form>
         )}
