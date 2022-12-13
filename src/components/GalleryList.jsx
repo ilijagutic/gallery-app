@@ -22,8 +22,8 @@ const GalleriesList = ({ galleries }) => {
             </h1>
             <img
               style={{
-                width: "25%",
-                height: "25%",
+                width: "30%",
+                height: "30%",
               }}
               src={
                 gallery.images[0]?.image_url
@@ -32,7 +32,7 @@ const GalleriesList = ({ galleries }) => {
             />
             <p>{gallery.description}</p>
             <span>
-              Kreirao: {" "}
+              Created by{" "}
               <Link to={`/authors/${gallery.user_id}`}>
                 {gallery.user.first_name} {gallery.user.last_name}
               </Link>{" "}
@@ -43,8 +43,8 @@ const GalleriesList = ({ galleries }) => {
         ))
       ) : (
         <>
-          <div>Empty</div>
-          <Link to="/create"> <button className="btn">Kreiraj galeriju:</button> </Link>
+          <div>There were no galleries found</div>
+          <Link to="/create"> <button className="btn">Create New Gallery</button> </Link>
         </>
       )}
       {!isHidden && (
@@ -53,7 +53,7 @@ const GalleriesList = ({ galleries }) => {
           type='button'
           onClick={() => dispatch(setCurrentPage())}
         >
-          More..
+          Load More
         </button>
       )}
     </div>

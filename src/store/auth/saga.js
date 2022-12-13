@@ -37,9 +37,8 @@ function* logoutHandler(action) {
   } catch (error) {}
 }
 
-
 export function* watchAuth() {
   yield takeLatest(login.type, loginHandler);
   yield takeLatest(register.type, registerHandler);
   yield takeLatest(logout.type, logoutHandler);
-};
+}

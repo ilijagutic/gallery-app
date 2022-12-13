@@ -37,7 +37,7 @@ const RegisterPage = () => {
 
   return (
     <div className='container d.flex my-5'>
-      <h1> <FaUserAlt className='m-2' />REGISTRACIJA</h1>
+      <h1> <FaUserAlt className='m-2' />Register Page</h1>
       <div className=' m-3 text-center'>
         <form onSubmit={onSubmitHandler}>
           <div className="form-group">
@@ -46,7 +46,7 @@ const RegisterPage = () => {
               type="text"
               name="first_name"
               id="first_name"
-              placeholder='Ime'
+              placeholder='Please enter your name'
               value={first_name}
               onChange={onChangeHandler}
             />
@@ -57,7 +57,7 @@ const RegisterPage = () => {
               type="text"
               name="last_name"
               id="last_name"
-              placeholder='Prezime'
+              placeholder='Please enter your last name'
               value={last_name}
               onChange={onChangeHandler}
             />
@@ -68,7 +68,7 @@ const RegisterPage = () => {
               type="email"
               name="email"
               id="email"
-              placeholder='email'
+              placeholder='Please enter your email'
               value={email}
               onChange={onChangeHandler}
             />
@@ -79,7 +79,7 @@ const RegisterPage = () => {
               type="password"
               name="password"
               id="password"
-              placeholder='Unesi sifru'
+              placeholder='Please enter your password'
               value={password}
               onChange={onChangeHandler}
             />
@@ -90,7 +90,7 @@ const RegisterPage = () => {
               type="password"
               name="password_confirmation"
               id="password_confirmation"
-              placeholder='Potvrdi sifru'
+              placeholder='Please confirm your password'
               value={password_confirmation}
               onChange={onChangeHandler}
             />
@@ -111,11 +111,11 @@ const RegisterPage = () => {
               id='terms_and_conditions'
             />
             <label htmlFor='terms_and_conditions' className='form-check-label'>
-              Prihvatam uslove koriscenja
+              I accept the terms and conditions
             </label>
           </div>
           <div className="form-group">
-            <button type="submit" className='btn btn-primary'>Registracija</button>
+            <button type="submit" className='btn btn-primary'>Register</button>
           </div>
         </form>
       </div>

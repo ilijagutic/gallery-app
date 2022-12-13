@@ -54,8 +54,8 @@ const CreateNewGallery = () => {
                     content: { gallery, id },
                     meta: {
                         onSuccess: () => {
-                            console.log("go to", `edit-gallery/${id}`);
-                            history.push(`/edit-gallery/${id}`);
+                            history.push(`/edit/${id}`);
+                            history.push(`/my-galleries`);
                         },
                     },
                 })
@@ -104,13 +104,10 @@ const CreateNewGallery = () => {
         setImageList(newImageList);
     };
 
-    const userId = useSelector(selectUserId);
-    if (id && fetchedGallery && fetchedGallery.user_id !== parseInt(userId)) {
-        return <Redirect to='/' />;
-    }
+  
     return (
         <div className='container d.flex my-5'>
-            <h1 className="m-4"><FaPlusCircle /> Kreiraj galeriju</h1>
+            <h1 className="m-4"><FaPlusCircle /> Create New Gallery</h1>
             <form onSubmit={onSubmitHandler}>
                 <div className='form-group'>
                     <input
@@ -120,7 +117,7 @@ const CreateNewGallery = () => {
                         min='2'
                         max='255'
                         value={gallery.name}
-                        placeholder='Unesite ime...'
+                        placeholder='Enter gallery name...'
                         className='form-control'
                         onChange={(e) => setGallery({ ...gallery, name: e.target.value })}
                     />
@@ -131,7 +128,7 @@ const CreateNewGallery = () => {
                         max='1000'
                         name='description'
                         value={gallery.description}
-                        placeholder='Opis...'
+                        placeholder='Enter description...'
                         className='form-control'
                         onChange={(e) =>
                             setGallery({ ...gallery, description: e.target.value })
@@ -147,7 +144,7 @@ const CreateNewGallery = () => {
                                     type='text'
                                     name='image'
                                     value={image.image_url}
-                                    placeholder='URL'
+                                    placeholder='Enter image URL...'
                                     className='form-control'
                                     onChange={(e) => editImageUrl(image, e.target.value)}
                                 />
@@ -160,7 +157,7 @@ const CreateNewGallery = () => {
                                         type='button'
                                         disabled={index === 0}
                                     >
-                                        Gore;
+                                        Move &#8593;
                                     </button>
                                     <button
                                         className='btn btn-light m-1'
@@ -168,14 +165,14 @@ const CreateNewGallery = () => {
                                         type='button'
                                         disabled={index === imageList.length - 1}
                                     >
-                                        Dole;
+                                        Move &#8595;
                                     </button>
                                     <button
                                         type='button'
                                         className='btn m-3'
                                         onClick={() => removeHandler(image)}
                                     >
-                                        Ukloni
+                                        Remove
                                     </button>
                                 </div>
                             )}
@@ -189,17 +186,17 @@ const CreateNewGallery = () => {
                     }}
                     className='mb-3 d-block btn btn-light'
                 >
-                    Dodaj URL
+                    Add another URL
                 </button>
                 <button type='submit' className='btn btn-primary mr-3'>
-                    Potvrdi
+                    Submit
                 </button>
                 <button
                     type='button'
                     className='btn btn-light'
                     onClick={() => history.push("/my-galleries")}
                 >
-                    Otkazi
+                    Cancel
                 </button>
             </form>
         </div>

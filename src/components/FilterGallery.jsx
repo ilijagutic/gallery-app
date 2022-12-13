@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { reset , setSearch } from "../store/gallery/slice";
+import { reset, setSearch } from "../store/gallery/slice";
 
 
 const GalleriesFilter = () => {

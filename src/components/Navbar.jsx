@@ -15,44 +15,44 @@ const Navbar = () => {
         <>
             <nav className='navbar navbar-expand bg-light'>
                 <ul className='navbar-nav'>
-                    <span className='navbar-brand'>GALLERY App</span>
+                    <span className='navbar-brand'>Galleries App</span>
                     <li className='nav-item'>
                         <Link className='nav-link text-dark' to='/'>
-                           <FaImages /> Galerije:
+                           <FaImages /> All Galleries
                         </Link>
                     </li>
                     {!isAuthenticated && (
                         <li className='nav-item'>
                             <Link className='nav-link text-dark' to='/login'>
-                                <FaSignInAlt /> Uloguj se
+                                <FaSignInAlt /> Login
                             </Link>
                         </li>
                     )}
                     {!isAuthenticated && (
                         <li className='nav-item'>
                             <Link className='nav-link text-dark' to='/register'>
-                              <FaUserAlt/>  Registracija
+                              <FaUserAlt/>  Register
                             </Link>
                         </li>
                     )}
                     {isAuthenticated && (
                         <li className='nav-item'>
                             <Link className='nav-link text-dark' to='/my-galleries'>
-                            <FaImages />  Moje galerije
+                            <FaImages />  My Galleries
                             </Link>
                         </li>
                     )}
                     {isAuthenticated && (
                         <li className='nav-item'>
                             <Link className='nav-link text-dark' to='/create'>
-                               <FaPlusCircle/> Kreiraj galeriju
+                               <FaPlusCircle/> Create new Gallery
                             </Link>
                         </li>
                     )}
                     {isAuthenticated && (
                         <li className='nav-item'>
                             <button className='btn' onClick={() => dispatch(logout())}>
-                               <FaSignOutAlt/> Izloguj se
+                               <FaSignOutAlt/> Logout
                             </button>
                         </li>
                     )}
@@ -63,4 +63,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar;
+export default Navbar

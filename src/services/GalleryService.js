@@ -1,125 +1,54 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import CommentService from "../services/CommentService";
-import GalleryService from "../services/GalleryService";
-import {
-  addComment,
-  addCommentToGallery,
-  addGalleries,
-  addGallery,
-  createGallery,
-  deleteGallery,
-  editGallery,
-  getGalleries,
-  getGallery,
-  getMyGalleries,
-  getUserGalleries,
-  removeComment,
-  removeCommentFromGallery,
-  setGalleries,
-  setGallery,
-  setIsHidden,
-} from "../store/gallery/slice";
+import HttpService from "./HttpService";
+class GalleryService extends HttpService {
 
-function* getGalleriesHandler(action) {
-  try {
-    const data = yield call(GalleryService.getAll, action.payload);
-    if (action.payload.page > 1) yield put(addGalleries(data.data));
-    else yield put(setGalleries(data.data));
+  getAll = async ({ page, filter }) => {
+    const response = await this.client.get("/galleries", {
+      params: {
+        page,
+        filter,
+      },
+    });
+    return response.data;
+  };
 
-    yield put(setIsHidden(!data.next_page_url));
-  } catch (error) {
-    console.log(error);
-  }
-}
+  getMyGalleries = async ({ page, filter }) => {
+    const response = await this.client.get("/my-galleries", {
+      params: {
+        page,
+        filter,
+      },
+    });
+    return response.data;
+  };
 
-function* getMyGalleriesHandler(action) {
-  try {
-    const data = yield call(GalleryService.getMyGalleries, action.payload);
-    if (action.payload.page > 1) yield put(addGalleries(data.data));
-    else yield put(setGalleries(data.data));
-    yield put(setIsHidden(!data.next_page_url));
-  } catch (error) {
-    console.log(error);
-  }
-}
+  getUserGalleries = async ({ page, filter, id }) => {
+    const response = await this.client.get(`authors/${id}`, {
+      params: {
+        page,
+        filter,
+      },
+    });
+    return response.data;
+  };
 
-function* getUserGalleriesHandler(action) {
-  try {
-    const data = yield call(GalleryService.getUserGalleries, action.payload);
-    if (action.payload.page > 1) yield put(addGalleries(data.data));
-    else yield put(setGalleries(data.data));
-    yield put(setIsHidden(!data.next_page_url));
-  } catch (error) {
-    console.log(error);
-  }
-}
-function* getGalleryHandler(action) {
-  try {
-    const data = yield call(GalleryService.getGallery, action.payload);
-    yield put(setGallery(data));
-  } catch (error) {
-    console.log(error);
-  }
-}
+  getGallery = async (id) => {
+    const response = await this.client.get(`/galleries/${id}`);
+    return response.data;
+  };
 
-function* createGalleryHandler(action) {
-  try {
-    const gallery = yield call(
-      GalleryService.createGallery,
-      action.payload.gallery
-    );
-    yield put(addGallery(gallery));
-    if (action.payload.meta) {
-      yield call(action.payload.meta.onSuccess);
-    }
-  } catch (error) {
-    console.log(error.response);
-  }
-}
+  createGallery = async (gallery) => {
+    const response = await this.client.post("/create", gallery);
+    return response.data;
+  };
 
-function* editGalleryHandler(action) {
-  try {
-    yield call(GalleryService.editGallery, action.payload.content);
-    if (action.payload.meta.onSuccess) {
-      yield call(action.payload.meta.onSuccess);
-    }
-  } catch (error) {
-    console.log(error);
-  }
+  editGallery = async ({ id, gallery }) => {
+    const response = await this.client.put(`/edit/${id}`, gallery);
+    return response.data;
+  };
+  
+  deleteGallery = async (id) => {
+    const response = await this.client.post(`delete/${id}`);
+    return response.data;
+  };
 }
-function* deleteGalleryHandler(action) {
-  yield call(GalleryService.deleteGallery, action.payload.id);
-  if (action.payload.meta.onSuccess) {
-    yield call(action.payload.meta.onSuccess);
-  }
-}
-function* addCommentHandler(action) {
-  try {
-    const data = yield call(CommentService.createComment, action.payload);
-    yield put(addCommentToGallery(data));
-  } catch (error) {
-    console.log(error);
-  }
-}
-function* removeCommentHandler(action) {
-  try {
-    yield call(CommentService.deleteComment, action.payload);
-    yield put(removeCommentFromGallery(action.payload));
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export function* watchGallery() {
-  yield takeLatest(getGalleries.type, getGalleriesHandler);
-  yield takeLatest(getMyGalleries.type, getMyGalleriesHandler);
-  yield takeLatest(getUserGalleries.type, getUserGalleriesHandler);
-  yield takeLatest(getGallery.type, getGalleryHandler);
-  yield takeLatest(createGallery.type, createGalleryHandler);
-  yield takeLatest(editGallery.type, editGalleryHandler);
-  yield takeLatest(deleteGallery.type, deleteGalleryHandler);
-  yield takeLatest(addComment.type, addCommentHandler);
-  yield takeLatest(removeComment.type, removeCommentHandler);
-}
-
-export default GalleryService;
+export default new GalleryService();

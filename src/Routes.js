@@ -4,7 +4,7 @@ import PublicRoute from "./components/PublicRoute";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import MyGallery from "./pages/MyGallery";
+import MyGalleries from "./pages/MyGallery";
 import UserGalleries from "./pages/UserGalleries";
 import PrivateRoute from "./components/PrivateRoute";
 import ViewGallery from "./components/ViewGallery";
@@ -24,7 +24,7 @@ const Routes = () => {
           <RegisterPage />
         </PublicRoute>
         <PrivateRoute exact path="/my-galleries/">
-          <MyGallery />
+          <MyGalleries />
         </PrivateRoute>
         <Route exact path="/authors/:id">
           <UserGalleries />

@@ -27,7 +27,7 @@ const Login = () => {
     }
     return (
         <div className="container d.flex my-5">
-            <h1> <FaSignInAlt className="mx-3"/>ULOGUJ SE</h1>
+            <h1> <FaSignInAlt className="mx-3"/>Login Page</h1>
             <div className='containter p-5 text-center'>
                 <form onSubmit={onSubmitHandler}>
                     <div className="form-group">
@@ -36,7 +36,7 @@ const Login = () => {
                             type="text"
                             name="email"
                             id="email"
-                            placeholder='Email'
+                            placeholder='Please enter your email'
                             value={email}
                             onChange={onChangeHandler}
                         />
@@ -47,14 +47,14 @@ const Login = () => {
                             type="password"
                             name="password"
                             id="password"
-                            placeholder='Password'
+                            placeholder='Please enter your password'
                             value={password}
                             onChange={onChangeHandler}
                         />
                     </div>
                     {error && <div className='text-danger m-3'>{error}</div>}
                     <div className="form-group">
-                        <button type="submit" className='btn btn-primary'>Potvrdi</button>
+                        <button type="submit" className='btn btn-primary'>Submit</button>
                     </div>
                 </form>
             </div>
